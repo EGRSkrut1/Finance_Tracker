@@ -1,0 +1,27 @@
+# Backend
+Backend/bin/
+Backend/obj/
+Backend/appsettings.json
+
+# Frontend
+Frontend/node_modules/
+Frontend/.cache/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.temp
