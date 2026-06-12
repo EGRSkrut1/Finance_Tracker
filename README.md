@@ -37,4 +37,3 @@ Frontend: http://localhost:3000
 | POST | `/api/categories` | Create category |
 | GET | `/api/transactions` | Transactions |
 | POST | `/api/transactions` | Add transaction |
-```
