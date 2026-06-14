@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FinanceTracker.src.API.Models;
+using FinanceTracker.src.Models;
 
 namespace FinanceTracker.src.Database;
 
@@ -23,4 +24,8 @@ public class AppDbContext : DbContext
             .HasIndex(u => u.Username)
             .IsUnique();
     }
+
+    public DbSet<Category> Categories { get; set;}
+    public DbSet<Transaction> Transactions { get; set;}
+
 }
