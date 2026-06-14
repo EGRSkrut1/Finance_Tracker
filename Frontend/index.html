@@ -1,62 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Finance Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1n4lyBr0k3.finance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/landing-overlay.css">
 </head>
 <body>
-    <h1>Finance Tracker</h1>
 
-    <h2>Register</h2>
-    <input type="text" id="regUsername" placeholder="Username">
-    <input type="email" id="regEmail" placeholder="Email">
-    <input type="password" id="regPassword" placeholder="Password">
-    <button onclick="register()">Register</button>
+  <div class="landing">
+    <!-- ФОН: вторая картинка -->
+    <img
+      src="images/Slide_16_9_-_1_2.png"
+      alt=""
+      class="landing__bg"
+      draggable="false"
+    >
 
-    <h2>Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button onclick="login()">Login</button>
+    <!-- ОБЛАСТЬ 1: кнопка (синий круг в hero) -->
+    <a href="#registration" class="overlay overlay--cta">
+      перейти к регистрации
+    </a>
 
-    <pre id="result"></pre>
+    <!-- ОБЛАСТЬ 2: форма регистрации (синий круг в join the club) -->
+    <section id="registration" class="overlay overlay--form">
+      <form class="registration-form" onsubmit="event.preventDefault(); register();">
+        <label class="form-label" for="reg-username">имя пользователя</label>
+        <input type="text" id="reg-username" placeholder="username" autocomplete="username" required>
 
-    <script>
-        const API = 'http://localhost:5078/api';
+        <label class="form-label" for="reg-email">email</label>
+        <input type="email" id="reg-email" placeholder="you@mail.com" autocomplete="email" required>
 
-        async function register() {
-            const username = document.getElementById('regUsername').value;
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
+        <label class="form-label" for="reg-password">пароль</label>
+        <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password" required>
 
-            const res = await fetch(`${API}/auth/register`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username, email, password})
-            });
-            const data = await res.json();
-            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
-            if (data.token) {
-                localStorage.setItem('token', data.token);
-                window.location.href = 'dashboard.html';
-            }
-        }
+        <button type="submit" class="btn-submit">вступить в клуб</button>
+        <p id="register-error" class="form-error" aria-live="polite"></p>
+      </form>
+    </section>
 
-        async function login() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+    <!-- ОБЛАСТЬ 3: подвал (синий круг внизу) -->
+    <footer class="overlay overlay--footer">
+      <div class="footer-left">
+        <p class="footer-brand">F1n4lyBr0k3.finance</p>
+        <p class="footer-copy">© 2026 — все права и все долги зарезервированы</p>
+      </div>
+      <div class="footer-right">
+        <nav class="footer-nav">
+          <a href="#">политика приватности</a>
+          <a href="#">условия использования</a>
+          <a href="mailto:support@f1n4lybr0k3.finance">support@f1n4lybr0k3.finance</a>
+        </nav>
+        <p class="footer-tagline">мы не храним ваши банковские данные. мы храним только правду.</p>
+      </div>
+    </footer>
+  </div>
 
-            const res = await fetch(`${API}/auth/login`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email, password})
-            });
-            const data = await res.json();
-            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
-            if (data.token) {
-                localStorage.setItem('token', data.token);
-                window.location.href = 'dashboard.html';
-            }
-        }
-    </script>
+  <script src="js/app.js"></script>
 </body>
 </html>
