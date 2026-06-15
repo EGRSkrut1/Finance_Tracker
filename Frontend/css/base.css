@@ -1,0 +1,29 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.page {
+  display: none;
+}
+
+.page--active {
+  display: block;
+}
+
+.form-error {
+  min-height: 14px;
+  font-size: clamp(8px, 0.85vw, 10px);
+  color: #ff0000;
+  text-align: center;
+}
