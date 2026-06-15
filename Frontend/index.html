@@ -7,58 +7,150 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/landing-overlay.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
 
-  <div class="landing">
-    <!-- ФОН: вторая картинка -->
-    <img
-      src="images/Slide_16_9_-_1_2.png"
-      alt=""
-      class="landing__bg"
-      draggable="false"
-    >
+  <!-- ==================== СТРАНИЦА 1: ЛЕНДИНГ ==================== -->
+  <div id="page-landing" class="page page--active">
+    <div class="landing">
+      <img src="images/Slide_16_9_-_1_2.png" alt="" class="landing__bg" draggable="false">
 
-    <!-- ОБЛАСТЬ 1: кнопка (синий круг в hero) -->
-    <a href="#registration" class="overlay overlay--cta">
-      перейти к регистрации
-    </a>
+      <a href="#registration" class="overlay overlay--cta">перейти к регистрации</a>
 
-    <!-- ОБЛАСТЬ 2: форма регистрации (синий круг в join the club) -->
-    <section id="registration" class="overlay overlay--form">
-      <form class="registration-form" onsubmit="event.preventDefault(); register();">
-        <label class="form-label" for="reg-username">имя пользователя</label>
-        <input type="text" id="reg-username" placeholder="username" autocomplete="username" required>
+      <section id="registration" class="overlay overlay--form">
+        <form class="registration-form" id="register-form">
+          <label class="form-label" for="reg-username">имя пользователя</label>
+          <input type="text" id="reg-username" placeholder="username" autocomplete="username" required>
 
-        <label class="form-label" for="reg-email">email</label>
-        <input type="email" id="reg-email" placeholder="you@mail.com" autocomplete="email" required>
+          <label class="form-label" for="reg-email">email</label>
+          <input type="email" id="reg-email" placeholder="you@mail.com" autocomplete="email" required>
 
-        <label class="form-label" for="reg-password">пароль</label>
-        <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password" required>
+          <label class="form-label" for="reg-password">пароль</label>
+          <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password" required>
 
-        <button type="submit" class="btn-submit">вступить в клуб</button>
-        <p id="register-error" class="form-error" aria-live="polite"></p>
-      </form>
-    </section>
+          <button type="submit" class="btn-submit">вступить в клуб</button>
+          <p id="register-error" class="form-error" aria-live="polite"></p>
+        </form>
+      </section>
 
-    <!-- ОБЛАСТЬ 3: подвал (синий круг внизу) -->
-    <footer class="overlay overlay--footer">
-      <div class="footer-left">
-        <p class="footer-brand">F1n4lyBr0k3.finance</p>
-        <p class="footer-copy">© 2026 — все права и все долги зарезервированы</p>
-      </div>
-      <div class="footer-right">
-        <nav class="footer-nav">
-          <a href="#">политика приватности</a>
-          <a href="#">условия использования</a>
-          <a href="mailto:support@f1n4lybr0k3.finance">support@f1n4lybr0k3.finance</a>
-        </nav>
-        <p class="footer-tagline">мы не храним ваши банковские данные. мы храним только правду.</p>
-      </div>
-    </footer>
+      <footer class="overlay overlay--footer">
+        <div class="footer-left">
+          <p class="footer-brand">F1n4lyBr0k3.finance</p>
+          <p class="footer-copy">© 2026 — все права и все долги зарезервированы</p>
+        </div>
+        <div class="footer-right">
+          <nav class="footer-nav">
+            <a href="#">политика приватности</a>
+            <a href="#">условия использования</a>
+            <a href="mailto:support@f1n4lybr0k3.finance">support@f1n4lybr0k3.finance</a>
+          </nav>
+          <p class="footer-tagline">мы не храним ваши банковские данные. мы храним только правду.</p>
+        </div>
+      </footer>
+    </div>
   </div>
 
+  <!-- ==================== СТРАНИЦА 2: DASHBOARD ==================== -->
+  <div id="page-dashboard" class="page">
+    <div class="dashboard-page">
+
+      <header class="dashboard-header">
+        <p class="dashboard-header__brand">F1n4lyBr0k3.finance</p>
+        <p class="dashboard-header__user" id="dash-username">user</p>
+        <button class="btn-logout" type="button" id="btn-logout">выйти</button>
+      </header>
+
+      <main class="dashboard">
+
+        <section class="panel panel--stats">
+          <h2 class="panel__title">earned/spent</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-card__label">Баланс</span>
+              <span class="stat-card__value" id="stat-balance">₽ 0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card__label">Доходы</span>
+              <span class="stat-card__value stat-card__value--income" id="stat-income">₽ 0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card__label">Расходы</span>
+              <span class="stat-card__value stat-card__value--expense" id="stat-expense">₽ 0</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel panel--chart">
+          <h2 class="panel__title panel__title--center">graphics</h2>
+          <p class="chart-subtitle">Доходы и расходы по месяцам</p>
+          <div class="chart-wrap">
+            <canvas id="monthlyChart"></canvas>
+          </div>
+        </section>
+
+        <section class="panel panel--history">
+          <h2 class="panel__title panel__title--center">history</h2>
+
+          <form id="transaction-form" class="transaction-form">
+            <div class="form-row">
+              <label><span>дата</span><input type="date" id="tx-date" required></label>
+              <label><span>описание</span><input type="text" id="tx-description" placeholder="зарплата, продукты..." required></label>
+              <label><span>категория</span>
+                <select id="tx-category" required>
+                  <option value="income">Доход</option>
+                  <option value="expense">Расход</option>
+                </select>
+              </label>
+              <label><span>тип</span>
+                <select id="tx-type" required><option value="">— выберите тип —</option></select>
+              </label>
+              <label><span>сумма</span><input type="number" id="tx-amount" min="1" step="1" required></label>
+              <button type="submit" class="btn-add">добавить</button>
+            </div>
+            <p id="form-error" class="form-error"></p>
+          </form>
+
+          <div class="table-wrap">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>дата</th>
+                  <th>описание</th>
+                  <th>категория</th>
+                  <th>тип</th>
+                  <th>сумма</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="dashboard-footer">
+        <div class="dashboard-footer-left">
+          <p class="dashboard-footer-brand">F1n4lyBr0k3.finance</p>
+          <p class="dashboard-footer-copy">© 2026 — все права и все долги зарезервированы</p>
+        </div>
+        <div class="dashboard-footer-right">
+          <nav class="dashboard-footer-nav">
+            <a href="#">политика приватности</a>
+            <a href="#">условия использования</a>
+            <a href="mailto:support@f1n4lybr0k3.finance">support@f1n4lybr0k3.finance</a>
+          </nav>
+          <p class="dashboard-footer-tagline">мы не храним ваши банковские данные. мы храним только правду.</p>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/dashboard.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

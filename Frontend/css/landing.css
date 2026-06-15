@@ -1,23 +1,7 @@
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: #000;
-  font-family: 'IBM Plex Mono', monospace;
-}
-
-/* Контейнер = размер картинки */
 .landing {
   position: relative;
   width: 100%;
-  max-width: 1440px;   /* ширина макета из Figma, подгони под свой экспорт */
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -25,18 +9,15 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  pointer-events: none;  /* клики проходят к кнопкам/форме */
+  pointer-events: none;
   user-select: none;
 }
 
-/* Общий стиль для всех наложений */
 .overlay {
   position: absolute;
   z-index: 2;
 }
 
-/* ===== ОБЛАСТЬ 1: кнопка ===== */
-/* Подгони top/left/width под синий круг на твоей первой картинке */
 .overlay--cta {
   top: 18%;
   left: 58%;
@@ -59,7 +40,6 @@ body {
   box-shadow: 3px 3px 0 #ffffff;
 }
 
-/* ===== ОБЛАСТЬ 2: форма ===== */
 .overlay--form {
   top: 68%;
   left: 62%;
@@ -79,7 +59,7 @@ body {
 
 .form-label {
   font-size: clamp(8px, 0.9vw, 11px);
-  color: #ffffff;
+  color: #fff;
   text-transform: lowercase;
 }
 
@@ -100,7 +80,7 @@ body {
 }
 
 .registration-form input:focus {
-  border-color: #ffffff;
+  border-color: #fff;
 }
 
 .btn-submit {
@@ -113,22 +93,13 @@ body {
   font-size: clamp(9px, 1vw, 12px);
   text-transform: lowercase;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
 }
 
 .btn-submit:hover {
-  background: #ffffff;
+  background: #000;
   color: #fff;
 }
 
-.form-error {
-  min-height: 14px;
-  font-size: clamp(8px, 0.85vw, 10px);
-  color: #ff0000;
-  text-align: center;
-}
-
-/* ===== ОБЛАСТЬ 3: подвал ===== */
 .overlay--footer {
   bottom: 0;
   left: 0;
@@ -183,7 +154,7 @@ body {
 }
 
 .footer-nav a:hover {
-  color: #ffffff;
+  color: #ff0000;
 }
 
 .footer-tagline {
@@ -191,7 +162,6 @@ body {
   opacity: 0.6;
 }
 
-/* На узких экранах — fallback без фона-картинки */
 @media (max-width: 768px) {
   .landing__bg {
     display: none;
