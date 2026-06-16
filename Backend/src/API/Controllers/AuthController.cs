@@ -27,6 +27,15 @@ public class AuthController : ControllerBase
         _validationService = validationService;
     }
 
+    [HttpPost("check")]
+    public async Task<IActionResult> CheckUser([FromBody] CheckRequest request)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == request.Email);
+        
+        return Ok(new { exists = user != null });
+    }
+
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
@@ -92,6 +101,11 @@ public class AuthController : ControllerBase
             user = new { user.Id, user.Email, user.Username }
         });
     }
+}
+
+public class CheckRequest
+{
+    public string Email { get; set; } = string.Empty;
 }
 
 public class RegisterRequest

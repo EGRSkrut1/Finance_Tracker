@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FinanceTracker.src.Models;
 using FinanceTracker.src.Database;
 
-
 namespace FinanceTracker.src.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -14,7 +15,8 @@ namespace FinanceTracker.src.API.Controllers
         public CategoriesController(AppDbContext context)
         {
             _contextE = context;
-        } 
+        }
+
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -26,10 +28,8 @@ namespace FinanceTracker.src.API.Controllers
         public IActionResult GetById(int id)
         {
             var category = _contextE.Categories.Find(id);
-    
             if (category == null)
-            return NotFound();
-
+                return NotFound();
             return Ok(category);
         }
 
@@ -38,7 +38,6 @@ namespace FinanceTracker.src.API.Controllers
         {
             _contextE.Categories.Add(category);
             _contextE.SaveChanges();
-
             return Ok(category);
         }
 
@@ -46,15 +45,11 @@ namespace FinanceTracker.src.API.Controllers
         public IActionResult Update(int id, [FromBody] Category category)
         {
             var CategoriesBe = _contextE.Categories.Find(id);
-
             if (CategoriesBe == null)
-            return NotFound();
-
+                return NotFound();
             CategoriesBe.Name = category.Name;
             CategoriesBe.Type = category.Type;
-
             _contextE.SaveChanges();
-
             return Ok(CategoriesBe);
         }
 
@@ -62,14 +57,11 @@ namespace FinanceTracker.src.API.Controllers
         public IActionResult Delete(int id)
         {
             var category = _contextE.Categories.Find(id);
-
             if (category == null)
-            return NotFound();
-
+                return NotFound();
             _contextE.Categories.Remove(category);
             _contextE.SaveChanges();
-
             return Ok("Удалено");
-        }   
+        }
     }
 }

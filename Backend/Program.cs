@@ -7,10 +7,8 @@ using FinanceTracker.src.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Добавляем контроллеры
 builder.Services.AddControllers();
 
-// Настройка CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -22,17 +20,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Добавляем DbContext (MySQL)
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Регистрируем сервисы
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<ValidationService>();
 
-// Настройка JWT аутентификации
 var jwtKey = builder.Configuration["Jwt:SecretKey"] ?? "finance-tracker-super-secret-key-1234567890";
 var key = Encoding.UTF8.GetBytes(jwtKey);
 
@@ -56,13 +51,11 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Мидлвары
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-// Создаём БД, если её нет
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();

@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FinanceTracker.src.Models;
 using FinanceTracker.src.Database;
 
-
 namespace FinanceTracker.src.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TransactionsController : ControllerBase
@@ -22,7 +23,6 @@ namespace FinanceTracker.src.API.Controllers
             var transactions = _contextE.Transactions
                 .Where(t => t.UserId == userId)
                 .ToList();
-
             return Ok(transactions);
         }
 
@@ -32,7 +32,6 @@ namespace FinanceTracker.src.API.Controllers
             var transactions = _contextE.Transactions
                 .Where(t => t.UserId == userId && t.CategoryId == categoryId)
                 .ToList();
-
             return Ok(transactions);
         }
 
@@ -41,7 +40,6 @@ namespace FinanceTracker.src.API.Controllers
         {
             _contextE.Transactions.Add(transaction);
             _contextE.SaveChanges();
-
             return Ok(transaction);
         }
 
@@ -61,7 +59,6 @@ namespace FinanceTracker.src.API.Controllers
                 .Sum(t => t.Amount);
 
             var balance = income - spending;
-
             return Ok(new { income, spending, balance });
         }
 
@@ -89,13 +86,10 @@ namespace FinanceTracker.src.API.Controllers
         public IActionResult Delete(int id)
         {
             var transaction = _contextE.Transactions.Find(id);
-
             if (transaction == null)
                 return NotFound();
-
             _contextE.Transactions.Remove(transaction);
             _contextE.SaveChanges();
-
             return Ok("Удалено");
         }
     }

@@ -88,7 +88,7 @@
 
 5. Open browser:
    - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
+   - Backend API: http://localhost:5078
 
 ### Manual start
 
