@@ -17,7 +17,6 @@ public class JwtService
     {
         _configuration = configuration;
         
-        // Читаем из appsettings.json
         _secretKey = _configuration["Jwt:SecretKey"] ?? "your-super-secret-key-change-in-production";
         _issuer = _configuration["Jwt:Issuer"] ?? "FinanceTracker";
         _audience = _configuration["Jwt:Audience"] ?? "FinanceTrackerClient";
