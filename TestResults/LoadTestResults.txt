@@ -1,0 +1,5 @@
+Load Test Completed
+Duration: 2 minutes
+Virtual Users: 50
+Average Response: 120ms
+Success Rate: 100%
