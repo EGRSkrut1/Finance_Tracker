@@ -104,46 +104,6 @@ cd Frontend
 npx http-server -p 3000
 ```
 
----
-
-## Project Structure
-
-```
-Finance_Tracker/
-├── Backend/
-│   ├── src/
-│   │   ├── API/
-│   │   │   ├── Controllers/
-│   │   │   │   ├── AuthController.cs
-│   │   │   │   ├── UsersController.cs
-│   │   │   │   ├── CategoriesController.cs
-│   │   │   │   └── TransactionsController.cs
-│   │   │   └── Models/
-│   │   │       ├── User.cs
-│   │   │       ├── Category.cs
-│   │   │       └── Transaction.cs
-│   │   ├── Database/
-│   │   │   └── AppDbContext.cs
-│   │   └── Security/
-│   │       ├── JwtService.cs
-│   │       ├── PasswordService.cs
-│   │       └── ValidationService.cs
-│   ├── appsettings.json
-│   ├── appsettings.example.json
-│   ├── Program.cs
-│   └── FinanceTracker.csproj
-├── Frontend/
-│   ├── index.html
-│   ├── dashboard.html
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── app.js
-├── start.bat
-├── stop.bat
-└── README.md
-```
-
 ## License
 ```
 MIT License
